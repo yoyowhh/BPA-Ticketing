@@ -2,11 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Admin extends Model
+class Admin extends Authenticatable
 {
+    use Notifiable;
+
     protected $table = 'admin';
+
+    protected $primaryKey = 'admin_id';
+
+    public $timestamps = false;
 
     protected $fillable = [
         'nama_admin',
@@ -15,13 +22,7 @@ class Admin extends Model
         'role'
     ];
 
-    public function balasan()
-    {
-        return $this->hasMany(Balasan::class, 'admin_id');
-    }
-
-    public function catatanInternal()
-    {
-        return $this->hasMany(CatatanInternal::class, 'admin_id');
-    }
+    protected $hidden = [
+        'password'
+    ];
 }
