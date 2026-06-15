@@ -4,120 +4,176 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BPA Ticketing - Dashboard</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
     </style>
 </head>
-<body class="bg-[#1e1e1e] min-h-screen flex items-center justify-center p-4">
 
-    <!-- Container Utama Putih -->
-    <div class="bg-white w-full max-w-5xl rounded-sm shadow-2xl min-h-[600px] flex relative overflow-hidden">
-        
-        <!-- Label Mockup Kecil di Pojok Kiri Atas -->
-        <div class="absolute top-2 left-4 text-[10px] text-gray-400 select-none z-5xl">
-            Mockup 3 - Halaman setelah login
+<body class="bg-white h-screen overflow-hidden">
+
+<div class="w-full h-screen flex">
+
+    <!-- SIDEBAR -->
+    <aside class="w-72 bg-slate-50 border-r border-gray-200 flex flex-col">
+
+        <div class="p-8 border-b border-gray-200">
+            <h1 class="text-2xl font-bold">
+                BPA Ticketing
+            </h1>
+            <p class="text-sm text-gray-500 mt-1">
+                Sistem Layanan Ticketing
+            </p>
         </div>
 
-        <!-- ================= SIDEBAR (Kiri) ================= -->
-        <aside class="w-1/4 bg-[#f8fafc] border-r border-[#8b5cf6] pt-16 pb-8 px-6 flex flex-col justify-between">
-            <div class="space-y-8">
-                <!-- Logo / Judul App -->
-                <div class="font-bold text-lg text-black px-2">
-                    BPA Ticketing
-                </div>
-                
-                <!-- Menu Navigasi -->
-                <nav class="flex flex-col space-y-3">
-                    <!-- Beranda (Active State) -->
-                    <a href="#" class="flex items-center space-x-3 text-[#7a2222] font-semibold text-sm py-1.5 px-2 border-l-4 border-[#7a2222]">
-                        <span>Beranda</span>
-                    </a>
-                    <!-- Menu Lainnya -->
-                    <a href="#" class="flex items-center space-x-3 text-gray-600 hover:text-black font-medium text-sm py-1.5 px-2 transition">
-                        <span>Buat Tiket</span>
-                    </a>
-                    <a href="#" class="flex items-center space-x-3 text-gray-600 hover:text-black font-medium text-sm py-1.5 px-2 transition">
-                        <span>Riwayat Tiket</span>
-                    </a>
-                    <a href="#" class="flex items-center space-x-3 text-gray-600 hover:text-black font-medium text-sm py-1.5 px-2 transition">
-                        <span>Profil</span>
-                    </a>
-                </nav>
-            </div>
-        </aside>
+        <nav class="flex-1 p-6">
 
-        <!-- ================= KONTEN UTAMA (Kanan) ================= -->
-        <main class="w-3/4 p-12 pt-16 flex flex-col justify-between">
-            
-            <div>
-                <!-- Header Konten -->
-                <div class="flex justify-between items-start mb-8">
-                    <div>
-                        <h1 class="text-3xl font-bold text-black">Halo, Dina</h1>
-                        <p class="text-sm text-gray-600 mt-1">Silahkan pilih kategori untuk mengirim pertanyaan ke BPA.</p>
-                    </div>
-                    <!-- Tombol Buat Tiket -->
-                    <button class="bg-[#7a2222] hover:bg-[#631b1b] text-white font-semibold py-3 px-8 rounded-2xl shadow-md transition duration-200 text-sm">
+            <ul class="space-y-2">
+
+                <li>
+                    <a href="/dashboard"
+                       class="flex items-center px-4 py-3 rounded-xl bg-red-50 text-[#7a2222] font-semibold">
+                        Beranda
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/ticket"
+                       class="flex items-center px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-100 transition">
                         Buat Tiket
-                    </button>
-                </div>
+                    </a>
+                </li>
 
-                <!-- Grid Kategori Berbentuk Card -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    
-                    <!-- Card 1: Data Sertifikasi Dosen -->
-                    <div class="border border-gray-300 rounded-[24px] p-6 shadow-sm hover:shadow-md transition flex flex-col items-start space-y-4">
-                        <span class="bg-[#eef2ff] text-[#2563eb] text-xs font-semibold py-2 px-4 rounded-full border border-[#e0e7ff]">
-                            Data Sertifikasi Dosen
-                        </span>
-                        <span class="text-gray-400 text-xs font-medium">Pilih kategori ini</span>
-                    </div>
+                <li>
+                    <a href="#"
+                       class="flex items-center px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-100 transition">
+                        Riwayat Tiket
+                    </a>
+                </li>
 
-                    <!-- Card 2: Data Mahasiswa -->
-                    <div class="border border-gray-300 rounded-[24px] p-6 shadow-sm hover:shadow-md transition flex flex-col items-start space-y-4">
-                        <span class="bg-[#e8f5e9] text-[#2e7d32] text-xs font-semibold py-2 px-4 rounded-full border border-[#c8e6c9]">
-                            Data Mahasiswa
-                        </span>
-                        <span class="text-gray-400 text-xs font-medium">Pilih kategori ini</span>
-                    </div>
+                <li>
+                    <a href="/lengkapi-identitas"
+                       class="flex items-center px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-100 transition">
+                        Profil
+                    </a>
+                </li>
 
-                    <!-- Card 3: Program Magang Berdampak -->
-                    <div class="border border-gray-300 rounded-[24px] p-6 shadow-sm hover:shadow-md transition flex flex-col items-start space-y-4">
-                        <span class="bg-[#fdf8e2] text-[#b45309] text-xs font-semibold py-2 px-4 rounded-full border border-[#fef3c7]">
-                            Program Magang Berdampak
-                        </span>
-                        <span class="text-gray-400 text-xs font-medium">Pilih kategori ini</span>
-                    </div>
+            </ul>
 
-                    <!-- Card 4: Data Kerjasama -->
-                    <div class="border border-gray-300 rounded-[24px] p-6 shadow-sm hover:shadow-md transition flex flex-col items-start space-y-4">
-                        <span class="bg-[#f3e8ff] text-[#6b21a8] text-xs font-semibold py-2 px-4 rounded-full border border-[#e9d5ff]">
-                            Data Kerjasama
-                        </span>
-                        <span class="text-gray-400 text-xs font-medium">Pilih kategori ini</span>
-                    </div>
+        </nav>
 
-                </div>
+        <div class="p-6 border-t border-gray-200">
+            <p class="text-sm text-gray-500">
+                Login sebagai
+            </p>
+            <p class="font-semibold">
+                Dina
+            </p>
+        </div>
+
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="flex-1 overflow-y-auto p-10 bg-white">
+
+        <!-- HEADER -->
+        <div class="flex justify-between items-center mb-10">
+
+            <div>
+                <h1 class="text-4xl font-bold text-black">
+                    Halo, Dina 👋
+                </h1>
+
+                <p class="text-gray-500 mt-2">
+                    Silakan pilih kategori untuk mengirim pertanyaan ke BPA.
+                </p>
             </div>
 
-            <!-- Card Banner Ticket Aktif di Bagian Bawah -->
-            <div class="border border-gray-300 rounded-[20px] p-5 shadow-sm flex justify-between items-center bg-white mt-auto">
-                <div class="text-sm font-medium text-gray-800">
-                    Ticket aktif:<span class="font-semibold">#BPA-2026-014</span>.Status:<span class="font-semibold">In Progresss</span>
-                </div>
-                <a href="#" class="text-[#7a2222] font-bold text-sm flex items-center space-x-1 hover:underline">
-                    <span>Lihat riwayat</span>
-                    <span>&rarr;</span>
-                </a>
+            <button class="bg-[#7a2222] hover:bg-[#631b1b] hover:scale-105 transition text-white px-8 py-4 rounded-2xl shadow-lg font-semibold">
+                + Buat Tiket
+            </button>
+
+        </div>
+
+        <!-- KATEGORI -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <div class="border border-gray-200 rounded-3xl p-8 hover:shadow-xl transition cursor-pointer">
+                <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold">
+                    Data Sertifikasi Dosen
+                </span>
+
+                <p class="text-gray-500 mt-6">
+                    Ajukan pertanyaan terkait data sertifikasi dosen.
+                </p>
             </div>
 
-        </main>
+            <div class="border border-gray-200 rounded-3xl p-8 hover:shadow-xl transition cursor-pointer">
+                <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
+                    Data Mahasiswa
+                </span>
 
-    </div>
+                <p class="text-gray-500 mt-6">
+                    Ajukan pertanyaan terkait data mahasiswa.
+                </p>
+            </div>
+
+            <div class="border border-gray-200 rounded-3xl p-8 hover:shadow-xl transition cursor-pointer">
+                <span class="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm font-semibold">
+                    Program Magang Berdampak
+                </span>
+
+                <p class="text-gray-500 mt-6">
+                    Ajukan pertanyaan terkait program magang berdampak.
+                </p>
+            </div>
+
+            <div class="border border-gray-200 rounded-3xl p-8 hover:shadow-xl transition cursor-pointer">
+                <span class="bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-semibold">
+                    Data Kerjasama
+                </span>
+
+                <p class="text-gray-500 mt-6">
+                    Ajukan pertanyaan terkait data kerjasama.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- TIKET AKTIF -->
+        <div class="mt-10 border border-gray-200 rounded-3xl p-6 flex justify-between items-center shadow-sm">
+
+            <div>
+                <h3 class="font-semibold text-lg">
+                    Ticket Aktif
+                </h3>
+
+                <p class="text-gray-600 mt-1">
+                    #BPA-2026-014 •
+                    <span class="text-orange-500 font-semibold">
+                        In Progress
+                    </span>
+                </p>
+            </div>
+
+            <a href="#" class="text-[#7a2222] font-bold hover:underline">
+                Lihat Riwayat →
+            </a>
+
+        </div>
+
+    </main>
+
+</div>
 
 </body>
 </html>
