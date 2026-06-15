@@ -12,21 +12,22 @@ use Illuminate\Notifications\Notifiable;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable
+class User extends Model
 {
-    /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    protected $table = 'users';
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    protected $fillable = [
+        'nama_lengkap',
+        'nim_nip',
+        'email',
+        'status',
+        'password',
+        'prodi_unit',
+        'created_at'
+    ];
+
+    public function tickets()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasMany(Ticket::class, 'user_id');
     }
 }
