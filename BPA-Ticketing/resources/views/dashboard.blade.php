@@ -12,11 +12,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class="bg-white h-screen overflow-hidden">
@@ -30,6 +26,7 @@
             <h1 class="text-2xl font-bold">
                 BPA Ticketing
             </h1>
+
             <p class="text-sm text-gray-500 mt-1">
                 Sistem Layanan Ticketing
             </p>
@@ -41,28 +38,28 @@
 
                 <li>
                     <a href="/dashboard"
-                       class="flex items-center px-4 py-3 rounded-xl bg-red-50 text-[#7a2222] font-semibold">
+                       class="sidebar-active">
                         Beranda
                     </a>
                 </li>
 
                 <li>
                     <a href="/ticket"
-                       class="flex items-center px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-100 transition">
+                       class="sidebar-link">
                         Buat Tiket
                     </a>
                 </li>
 
                 <li>
                     <a href="#"
-                       class="flex items-center px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-100 transition">
+                       class="sidebar-link">
                         Riwayat Tiket
                     </a>
                 </li>
 
                 <li>
                     <a href="/lengkapi-identitas"
-                       class="flex items-center px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-100 transition">
+                       class="sidebar-link">
                         Profil
                     </a>
                 </li>
@@ -75,6 +72,7 @@
             <p class="text-sm text-gray-500">
                 Login sebagai
             </p>
+
             <p class="font-semibold">
                 Dina
             </p>
@@ -89,6 +87,7 @@
         <div class="flex justify-between items-center mb-10">
 
             <div>
+
                 <h1 class="text-4xl font-bold text-black">
                     Halo, Dina 👋
                 </h1>
@@ -96,9 +95,10 @@
                 <p class="text-gray-500 mt-2">
                     Silakan pilih kategori untuk mengirim pertanyaan ke BPA.
                 </p>
+
             </div>
 
-            <button class="bg-[#7a2222] hover:bg-[#631b1b] hover:scale-105 transition text-white px-8 py-4 rounded-2xl shadow-lg font-semibold">
+            <button class="btn-primary">
                 + Buat Tiket
             </button>
 
@@ -107,8 +107,8 @@
         <!-- KATEGORI -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-            <div class="border border-gray-200 rounded-3xl p-8 hover:shadow-xl transition cursor-pointer">
-                <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold">
+            <div class="dashboard-card">
+                <span class="category-badge badge-blue">
                     Data Sertifikasi Dosen
                 </span>
 
@@ -117,8 +117,8 @@
                 </p>
             </div>
 
-            <div class="border border-gray-200 rounded-3xl p-8 hover:shadow-xl transition cursor-pointer">
-                <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
+            <div class="dashboard-card">
+                <span class="category-badge badge-green">
                     Data Mahasiswa
                 </span>
 
@@ -127,8 +127,8 @@
                 </p>
             </div>
 
-            <div class="border border-gray-200 rounded-3xl p-8 hover:shadow-xl transition cursor-pointer">
-                <span class="bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm font-semibold">
+            <div class="dashboard-card">
+                <span class="category-badge badge-yellow">
                     Program Magang Berdampak
                 </span>
 
@@ -137,8 +137,8 @@
                 </p>
             </div>
 
-            <div class="border border-gray-200 rounded-3xl p-8 hover:shadow-xl transition cursor-pointer">
-                <span class="bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-semibold">
+            <div class="dashboard-card">
+                <span class="category-badge badge-purple">
                     Data Kerjasama
                 </span>
 
@@ -150,23 +150,29 @@
         </div>
 
         <!-- TIKET AKTIF -->
-        <div class="mt-10 border border-gray-200 rounded-3xl p-6 flex justify-between items-center shadow-sm">
+        <div class="ticket-active-box">
 
             <div>
+
                 <h3 class="font-semibold text-lg">
                     Ticket Aktif
                 </h3>
 
                 <p class="text-gray-600 mt-1">
                     #BPA-2026-014 •
+
                     <span class="text-orange-500 font-semibold">
                         In Progress
                     </span>
                 </p>
+
             </div>
 
-            <a href="#" class="text-[#7a2222] font-bold hover:underline">
+            <a href="#"
+               class="text-[#7a2222] font-bold hover:underline">
+
                 Lihat Riwayat →
+
             </a>
 
         </div>

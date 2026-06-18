@@ -11,20 +11,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body class="bg-white min-h-screen">
 
     <div class="w-full min-h-screen grid grid-cols-1 lg:grid-cols-2 px-8 lg:px-24 py-12 gap-16 items-center relative">
-
-        <!-- Label Mockup -->
-        <div class="absolute top-4 left-6 text-xs text-gray-400">
-        </div>
 
         <!-- BAGIAN KIRI -->
         <div class="flex flex-col justify-center max-w-xl">
@@ -42,19 +34,19 @@
 
             <div class="mt-10 flex flex-col gap-4 max-w-md">
 
-                <button class="bg-indigo-50 text-blue-600 border border-indigo-100 py-3 rounded-full font-semibold hover:shadow-md transition">
+                <button class="category-button bg-indigo-50 text-blue-600 border border-indigo-100 py-3 rounded-full font-semibold hover:shadow-md">
                     Data Sertifikasi Dosen
                 </button>
 
-                <button class="bg-green-50 text-green-700 border border-green-100 py-3 rounded-full font-semibold hover:shadow-md transition">
+                <button class="category-button bg-green-50 text-green-700 border border-green-100 py-3 rounded-full font-semibold hover:shadow-md">
                     Data Mahasiswa
                 </button>
 
-                <button class="bg-indigo-50 text-blue-600 border border-indigo-100 py-3 rounded-full font-semibold hover:shadow-md transition">
+                <button class="category-button bg-indigo-50 text-blue-600 border border-indigo-100 py-3 rounded-full font-semibold hover:shadow-md">
                     Program Magang Berdampak
                 </button>
 
-                <button class="bg-green-50 text-green-700 border border-green-100 py-3 rounded-full font-semibold hover:shadow-md transition">
+                <button class="category-button bg-green-50 text-green-700 border border-green-100 py-3 rounded-full font-semibold hover:shadow-md">
                     Data Kerjasama
                 </button>
 
@@ -81,7 +73,7 @@
                     <!-- Tombol Google -->
                     <button
                         type="button"
-                        class="w-full bg-[#8B1E1E] hover:bg-[#741818] text-white py-3.5 rounded-xl font-semibold shadow-md transition">
+                        class="google-button w-full bg-[#8B1E1E] hover:bg-[#741818] text-white py-3.5 rounded-xl font-semibold shadow-md">
                         Langsung dengan Google
                     </button>
 
@@ -97,8 +89,9 @@
 
                         <input
                             type="email"
+                            name="email"
                             placeholder="contoh@domain.com"
-                            class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gray-300">
+                            class="form-input w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none">
                     </div>
 
                     <!-- Password -->
@@ -109,14 +102,15 @@
 
                         <input
                             type="password"
+                            name="password"
                             placeholder="********"
-                            class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gray-300">
+                            class="form-input w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none">
                     </div>
 
                     <!-- Tombol Login -->
                     <button
                         type="submit"
-                        class="w-full bg-[#0F172A] hover:bg-[#1E293B] text-white py-3.5 rounded-xl font-semibold shadow-lg transition">
+                        class="login-button w-full bg-[#0F172A] hover:bg-[#1E293B] text-white py-3.5 rounded-xl font-semibold shadow-lg">
                         Masuk
                     </button>
 
@@ -137,3 +131,4 @@
 
 </body>
 </html>
+```
