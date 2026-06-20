@@ -1,0 +1,141 @@
+/* --- PEMANGGILAN FONT OFFLINE --- */
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('../fonts/PlusJakartaSans-VariableFont_wght.ttf') format('truetype-variations');
+    font-weight: 100 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Font Global */
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Sidebar Menu Aktif */
+.sidebar-active {
+    color: #8A1C22 !important;
+    font-weight: 600;
+    text-decoration: none;
+    border-left: 4px solid #8A1C22;
+    padding-left: 12px;
+}
+.sidebar-link {
+    color: #4B5563;
+    text-decoration: none;
+    font-weight: 500;
+    padding-left: 16px;
+    display: inline-block;
+    transition: color 0.2s ease;
+}
+.sidebar-link:hover {
+    color: #1F2937;
+}
+
+/* Tombol Utama */
+.btn-primary {
+    background-color: #7A2222;
+    color: white;
+    font-weight: 600;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+.btn-primary:hover {
+    background-color: #631B1B;
+    transform: translateY(-1px);
+}
+
+/* Kustom Card Komponen */
+.dashboard-card {
+    background-color: white;
+    border: 1px solid #1F2937;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-col: column;
+    align-items: flex-start;
+}
+
+/* Badges */
+.category-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 600;
+}
+.badge-blue { background-color: #EEF2FF; color: #3B82F6; }
+.badge-green { background-color: #E6F4EA; color: #10B981; }
+.badge-yellow { background-color: #FFF7ED; color: #D97706; }
+.badge-purple { background-color: #F3E8FF; color: #A855F7; }
+
+/* Tiket Aktif Box */
+.ticket-active-box {
+    margin-top: 40px;
+    background-color: white;
+    border: 1px solid #1F2937;
+    border-radius: 16px;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* --- TAMBAHAN UNTUK HALAMAN SUKSES TIKET --- */
+
+/* Box Sukses Hijau */
+.success-alert-box {
+    background-color: #E6F4EA; /* Hijau soft */
+    border: 1px solid #10B981;
+    border-radius: 20px;
+    padding: 32px;
+}
+
+/* Badge Open */
+.badge-open {
+    background-color: #CEEAD6;
+    color: #0F5132;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+/* Card Detail & Riwayat (Garis Tipis Hitam) */
+.border-card {
+    background-color: white;
+    border: 1px solid #1F2937;
+    border-radius: 20px;
+    padding: 32px;
+}
+
+/* Tombol Gelap "Buat Tiket Baru" */
+.btn-dark-custom {
+    background-color: #0F172A; /* Slate gelap mendekati hitam */
+    color: white;
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 14px;
+    transition: all 0.3s ease;
+}
+.btn-dark-custom:hover {
+    background-color: #1E293B;
+}
+
+/* Tombol Putih Outline "Lihat Riwayat" */
+.btn-outline-maroon {
+    background-color: white;
+    color: #7A2222;
+    border: 1px solid #7A2222;
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 14px;
+    transition: all 0.3s ease;
+}
+.btn-outline-maroon:hover {
+    background-color: #FFF5F5;
+}
