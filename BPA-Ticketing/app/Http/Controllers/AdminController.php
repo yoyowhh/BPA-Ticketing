@@ -46,7 +46,7 @@ class AdminController extends Controller
 
         // Asumsi kamu mungkin memiliki file admin-tickets.blade.php
         // Jika tidak, sesuaikan nama view-nya di sini
-        return view('admin.admin-tickets', compact('tickets'));
+        return view('admin.admin-ticket', compact('tickets'));
     }
 
     public function detail($id)
