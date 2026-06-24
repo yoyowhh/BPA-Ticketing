@@ -10,7 +10,8 @@ class AdminController extends Controller
 {
     public function loginPage()
     {
-        return view('admin.login');
+        // Disesuaikan dari 'admin.login' menjadi 'admin.admin-login'
+        return view('admin.admin-login');
     }
 
     public function login(Request $request)
@@ -32,7 +33,8 @@ class AdminController extends Controller
         $countOpen = DB::table('ticket')->where('status', 'Open')->count();
         $countDone = DB::table('ticket')->where('status', 'Resolved')->count();
 
-        return view('admin.dashboard', compact('countOpen', 'countDone'));
+        // Disesuaikan dari 'admin.dashboard' menjadi 'admin.admin-dashboard'
+        return view('admin.admin-dashboard', compact('countOpen', 'countDone'));
     }
 
     public function tickets()
@@ -42,7 +44,9 @@ class AdminController extends Controller
             ->join('kategori', 'ticket.kategori_id', '=', 'kategori.kategori_id')
             ->get();
 
-        return view('admin.tickets', compact('tickets'));
+        // Asumsi kamu mungkin memiliki file admin-tickets.blade.php
+        // Jika tidak, sesuaikan nama view-nya di sini
+        return view('admin.admin-tickets', compact('tickets'));
     }
 
     public function detail($id)
@@ -53,7 +57,8 @@ class AdminController extends Controller
             ->where('ticket_id', $id)
             ->get();
 
-        return view('admin.ticket-detail', compact('ticket', 'balasan'));
+        // Disesuaikan dari 'admin.ticket-detail' menjadi 'admin.admin-ticket'
+        return view('admin.admin-ticket', compact('ticket', 'balasan'));
     }
 
     public function reply(Request $request, $id)
