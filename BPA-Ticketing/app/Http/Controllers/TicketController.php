@@ -30,12 +30,13 @@ class TicketController extends Controller
     return view('dashboard', compact('user', 'kategori', 'ticketAktif'));
 }
 
-    public function create()
-    {
-        $kategori = DB::table('kategori')->get();
-        return view('ticket.create', compact('kategori'));
-    }
 
+public function create()
+{
+    $kategori = DB::table('kategori')->get();
+
+    return view('ticket.create', compact('kategori'));
+}
     public function store(Request $request)
     {
         $userId = Session::get('user_id');

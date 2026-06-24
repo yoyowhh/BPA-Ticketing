@@ -16,43 +16,57 @@
 
 <div class="flex min-h-screen">
 
-    <!-- SIDEBAR -->
+    {{-- SIDEBAR --}}
     @include('partials.sidebar')
 
-    <!-- CONTENT -->
+    {{-- CONTENT --}}
     <main class="flex-1 p-12">
 
         <h1 class="text-3xl font-bold mb-2">Buat Tiket</h1>
-        <p class="text-gray-500 mb-8">Silakan isi form untuk mengajukan pertanyaan ke BPA</p>
+        <p class="text-gray-500 mb-8">
+            Silakan isi form untuk mengajukan pertanyaan ke BPA
+        </p>
 
-        <!-- FORM -->
-        <form action="/ticket/store" method="POST" class="bg-white p-8 rounded-2xl shadow-md max-w-2xl space-y-6">
+        {{-- FORM --}}
+        <form action="{{ route('ticket.store') }}" method="POST"
+              class="bg-white p-8 rounded-2xl shadow-md max-w-2xl space-y-6">
+
             @csrf
 
-            <!-- KATEGORI -->
+            {{-- KATEGORI --}}
             <div>
-                <label class="block mb-2 font-medium text-gray-700">Kategori</label>
+                <label class="block mb-2 font-medium text-gray-700">
+                    Kategori
+                </label>
 
-                <select name="kategori_id" class="w-full border rounded-xl p-3 focus:ring-2 focus:ring-[#8B1E1E]">
-                    <option value="1">Teknis</option>
-                    <option value="2">Administrasi</option>
-                    <option value="3">IT Support</option>
-                    <option value="4">Keamanan</option>
+                <select name="kategori_id"
+                        class="w-full border rounded-xl p-3 focus:ring-2 focus:ring-[#8B1E1E]">
+
+                    <option value="">-- Pilih Kategori --</option>
+
+                    @foreach($kategori as $k)
+                        <option value="{{ $k->kategori_id }}">
+                            {{ $k->nama_kategori }}
+                        </option>
+                    @endforeach
+
                 </select>
             </div>
 
-            <!-- DESKRIPSI -->
+            {{-- DESKRIPSI --}}
             <div>
-                <label class="block mb-2 font-medium text-gray-700">Deskripsi Masalah</label>
+                <label class="block mb-2 font-medium text-gray-700">
+                    Deskripsi Masalah
+                </label>
 
                 <textarea name="deskripsi" rows="6"
-                    class="w-full border rounded-xl p-3 focus:ring-2 focus:ring-[#8B1E1E]"
-                    placeholder="Jelaskan masalah kamu..."></textarea>
+                          class="w-full border rounded-xl p-3 focus:ring-2 focus:ring-[#8B1E1E]"
+                          placeholder="Jelaskan masalah kamu..."></textarea>
             </div>
 
-            <!-- BUTTON -->
+            {{-- BUTTON --}}
             <button type="submit"
-                class="w-full bg-[#8B1E1E] hover:bg-[#741818] text-white py-3 rounded-xl font-semibold">
+                    class="w-full bg-[#8B1E1E] hover:bg-[#741818] text-white py-3 rounded-xl font-semibold">
                 Kirim Tiket
             </button>
 
