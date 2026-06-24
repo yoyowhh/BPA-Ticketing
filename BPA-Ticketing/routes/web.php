@@ -40,11 +40,9 @@ Route::middleware('auth.user')->group(function () {
 
     Route::get('/profile', [UserController::class, 'profile']);
 
-    /*
-    |-------------------------
-    | TICKET ROUTES (ORDER IMPORTANT)
-    |-------------------------
-    */
+    // ======================
+    // TICKET USER FLOW
+    // ======================
 
     Route::get('/ticket/create', [TicketController::class, 'create']);
 
@@ -53,7 +51,7 @@ Route::middleware('auth.user')->group(function () {
 
     Route::get('/ticket/history', [TicketController::class, 'history']);
 
-    // 🔥 IMPORTANT: HARUS PALING BAWAH + CONSTRAINT
+    // DETAIL TICKET (WAJIB PALING BAWAH + CONSTRAINT)
     Route::get('/ticket/{id}', [TicketController::class, 'show'])
         ->whereNumber('id');
 
@@ -87,4 +85,9 @@ Route::middleware('auth.admin')->group(function () {
 
     Route::post('/admin/ticket/{id}/status', [AdminController::class, 'updateStatus'])
         ->whereNumber('id');
+
+    // OPTIONAL: halaman kategori/pengguna/laporan (view-only)
+    Route::get('/admin/kategori', fn () => view('admin.admin-kategori'));
+    Route::get('/admin/pengguna', fn () => view('admin.admin-pengguna'));
+    Route::get('/admin/laporan', fn () => view('admin.admin-laporan'));
 });
