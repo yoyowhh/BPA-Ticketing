@@ -1,22 +1,90 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// 1. Wajib import Controller-nya di sini agar dikenali oleh Laravel
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 
-// 2. Route yang diatur oleh TicketController
+/*
+|--------------------------------------------------------------------------
+| AUTH USER
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/register', [AuthController::class, 'showRegister']);
+Route::post('/register', [AuthController::class, 'register']);
+
+Route::get('/login', [AuthController::class, 'showLogin']);
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::get('/logout', [AuthController::class, 'logout']);
+
+/*
+|--------------------------------------------------------------------------
+| PUBLIC HOME
+|--------------------------------------------------------------------------
+*/
+
 Route::get('/', [TicketController::class, 'welcome']);
-Route::get('/ticket', [TicketController::class, 'create']);
-Route::get('/lengkapi-identitas', [TicketController::class, 'identitas']);
-Route::get('/dashboard', [TicketController::class, 'index']);
-Route::get('/ticket/success', [TicketController::class, 'success'])->name('ticket.success');
 
-// Route untuk melihat detail riwayat tiket spesifik
-Route::get('/ticket/riwayat/{nomor}', [TicketController::class, 'show'])->name('ticket.detail');
-// Route POST untuk menangkap data saat user klik submit di form ticket
-Route::post('/ticket/store', [TicketController::class, 'store'])->name('ticket.store');
+/*
+|--------------------------------------------------------------------------
+| USER AREA
+|--------------------------------------------------------------------------
+*/
 
-// 3. Route untuk Admin Login (Jika mau dimasukkan ke AuthController nanti juga bisa)
-Route::get('/admin/login', function () {
-    return view('admin-login');
+Route::middleware('auth.user')->group(function () {
+
+    Route::get('/dashboard', [TicketController::class, 'index']);
+
+    Route::get('/profile', [UserController::class, 'profile']);
+
+    /*
+    |-------------------------
+    | TICKET ROUTES (ORDER IMPORTANT)
+    |-------------------------
+    */
+
+    Route::get('/ticket/create', [TicketController::class, 'create']);
+
+    Route::post('/ticket/store', [TicketController::class, 'store'])
+        ->name('ticket.store');
+
+    Route::get('/ticket/history', [TicketController::class, 'history']);
+
+    // 🔥 IMPORTANT: HARUS PALING BAWAH + CONSTRAINT
+    Route::get('/ticket/{id}', [TicketController::class, 'show'])
+        ->whereNumber('id');
+
+    Route::post('/ticket/{id}/reply', [TicketController::class, 'reply'])
+        ->whereNumber('id');
+
+    Route::post('/ticket/{id}/close', [TicketController::class, 'close'])
+        ->whereNumber('id');
+});
+
+/*
+|--------------------------------------------------------------------------
+| ADMIN AREA
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/admin/login', [AdminController::class, 'loginPage']);
+Route::post('/admin/login', [AdminController::class, 'login']);
+
+Route::middleware('auth.admin')->group(function () {
+
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
+
+    Route::get('/admin/tickets', [AdminController::class, 'tickets']);
+
+    Route::get('/admin/ticket/{id}', [AdminController::class, 'detail'])
+        ->whereNumber('id');
+
+    Route::post('/admin/ticket/{id}/reply', [AdminController::class, 'reply'])
+        ->whereNumber('id');
+
+    Route::post('/admin/ticket/{id}/status', [AdminController::class, 'updateStatus'])
+        ->whereNumber('id');
 });

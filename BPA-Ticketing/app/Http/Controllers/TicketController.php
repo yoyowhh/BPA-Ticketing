@@ -3,84 +3,108 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class TicketController extends Controller
 {
-    // 1. Menampilkan halaman utama / welcome
     public function welcome()
     {
         return view('welcome');
     }
 
-    // 2. Menampilkan halaman form input tiket
+    public function index()
+{
+    $userId = session('user_id');
+
+    $user = DB::table('user')->where('user_id', $userId)->first();
+
+    $kategori = DB::table('kategori')->get();
+
+    $ticketAktif = DB::table('ticket')
+        ->where('user_id', $userId)
+        ->whereIn('status', ['Open', 'In Progress'])
+        ->orderBy('created_at', 'desc')
+        ->first();
+
+    return view('dashboard', compact('user', 'kategori', 'ticketAktif'));
+}
+
     public function create()
     {
-        return view('ticket');
+        $kategori = DB::table('kategori')->get();
+        return view('ticket.create', compact('kategori'));
     }
 
-    // 3. Menangkap data dari form tiket dan menyimpannya (Logika Backend)
-    // Mengubah fungsi store agar mengarah ke route riwayat/detail
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'nim_nip' => 'required|string|max:50',
-            'status' => 'required|string|max:50',
-            'prodi_unit' => 'required|string|max:255',
-            'kategori_bpa' => 'required|string',
-            'pertanyaan' => 'required|string',
+        $userId = Session::get('user_id');
+
+        DB::table('ticket')->insert([
+            'nomor_ticket' => 'TCK-' . rand(1000,9999),
+            'user_id' => $userId,
+            'kategori_id' => $request->kategori_id,
+            'deskripsi' => $request->deskripsi,
+            'status' => 'Open',
+            'created_at' => now()
         ]);
 
-        // Simulasi generate nomor tiket unik
-        $nomorTiket = 'BPA-2026-' . rand(100, 999);
-
-        // Di sini nanti tempat menyimpan data ke DB...
-
-        // Redirect ke halaman riwayat detail tiket yang baru dibuat
-        return redirect()->route('ticket.detail', ['nomor' => $nomorTiket])->with([
-            'just_created' => true, // Flag penanda kalau tiket ini baru aja disubmit
-            'kategori' => $request->kategori_bpa,
-            'pengirim' => $request->nama,
-            'pertanyaan' => $request->pertanyaan,
-        ]);
+        return redirect('/ticket/history');
     }
 
-    // Fungsi baru untuk menampilkan detail riwayat tiket
-    public function show($nomor)
+    public function history()
     {
-        // Nanti di sini tempat mengambil data dari DB berdasarkan $nomor
-        // Untuk sekarang kita pakai data mock dari session atau default value
-        $data = [
-            'nomor_ticket' => $nomor,
-            'kategori' => session('kategori', 'Data Mahasiswa'),
-            'pengirim' => session('pengirim', 'Dina Nur Aulia'),
-            'pertanyaan' => session('pertanyaan', 'Pertanyaan terkait pembaruan data mahasiswa untuk kebutuhan laporan.'),
-            'waktu' => now()->format('H:i')
-        ];
+        $userId = Session::get('user_id');
 
-        return view('ticket-success', $data);
+        $tickets = DB::table('ticket')
+            ->join('kategori', 'ticket.kategori_id', '=', 'kategori.kategori_id')
+            ->where('user_id', $userId)
+            ->get();
+
+        return view('ticket.history', compact('tickets'));
     }
 
-    // 4. Menampilkan halaman sukses setelah kirim tiket (Mockup 5)
-    public function success()
+    public function show($id)
     {
-        // Pastikan halaman ini hanya bisa diakses kalau abis submit form (punya session nomor_ticket)
-        if (!session('nomor_ticket')) {
-            return redirect('/dashboard');
-        }
+        $ticket = DB::table('ticket')->where('ticket_id', $id)->first();
 
-        return view('ticket-success');
+        $balasan = DB::table('balasan')
+            ->join('admin', 'balasan.admin_id', '=', 'admin.admin_id')
+            ->where('ticket_id', $id)
+            ->get();
+
+        return view('ticket.detail', compact('ticket', 'balasan'));
     }
 
-    // 5. Menampilkan halaman dashboard (Daftar Tiket)
-    public function index()
+    public function reply(Request $request, $id)
+{
+    $isAdmin = session()->has('admin_id');
+
+    DB::table('balasan')->insert([
+        'ticket_id' => $id,
+        'admin_id' => $isAdmin ? session('admin_id') : null,
+        'pesan' => $request->pesan,
+        'created_at' => now()
+    ]);
+
+    // AUTO STATUS SYSTEM
+    if ($isAdmin) {
+        DB::table('ticket')->where('ticket_id', $id)
+            ->update(['status' => 'In Progress']);
+    } else {
+        DB::table('ticket')->where('ticket_id', $id)
+            ->update(['status' => 'Open']);
+    }
+
+    return back();
+}
+
+    public function close($id)
     {
-        return view('dashboard');
+        DB::table('ticket')->where('ticket_id', $id)
+            ->update(['status' => 'Resolved']);
+
+        return back();
     }
 
-    // 6. Menampilkan halaman identitas
-    public function identitas()
-    {
-        return view('identitas');
-    }
 }
