@@ -88,7 +88,7 @@ public function create()
         'created_at' => now()
     ]);
 
-    // AUTO STATUS SYSTEM
+    // status update tetap seperti ini (OK)
     if ($isAdmin) {
         DB::table('ticket')->where('ticket_id', $id)
             ->update(['status' => 'In Progress']);
@@ -107,5 +107,23 @@ public function create()
 
         return back();
     }
+
+public function openAdminChat($id)
+{
+    $ticket = DB::table('ticket')
+        ->where('ticket_id', $id)
+        ->first();
+
+    // 🔥 WAJIB SAFE GUARD
+    if (!$ticket) {
+        abort(404, 'Ticket tidak ditemukan');
+    }
+
+    $balasan = DB::table('balasan')
+        ->where('ticket_id', $id)
+        ->get();
+
+    return view('admin.chat', compact('ticket', 'balasan'));
+}
 
 }

@@ -91,3 +91,14 @@ Route::middleware('auth.admin')->group(function () {
     Route::get('/admin/pengguna', fn () => view('admin.admin-pengguna'));
     Route::get('/admin/laporan', fn () => view('admin.admin-laporan'));
 });
+
+Route::get('/admin/ticket/{id}', function ($id) {
+
+    $ticket = DB::table('ticket')->where('ticket_id', $id)->first();
+
+    $balasan = DB::table('balasan')
+        ->where('ticket_id', $id)
+        ->get();
+
+    return view('admin.chat', compact('ticket', 'balasan'));
+});
