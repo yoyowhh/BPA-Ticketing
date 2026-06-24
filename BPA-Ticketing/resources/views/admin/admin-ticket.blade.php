@@ -24,23 +24,26 @@
 </div>
 
 {{-- LIST TIKET --}}
+
 <div class="ticket-list">
 
+    {{-- 1 --}}
     <div class="ticket-card">
         <div class="ticket-left">
-            <h3>#001 - Login Error</h3>
-            <p>User tidak bisa login ke sistem</p>
+            <h3>#101 - Verifikasi Sertifikasi Dosen</h3>
+            <p>Data sertifikasi belum sinkron di sistem PDDikti</p>
         </div>
         <div class="ticket-right">
             <span class="status open">Open</span>
-            <small>2 menit lalu</small>
+            <small>5 menit lalu</small>
         </div>
     </div>
 
+    {{-- 2 --}}
     <div class="ticket-card">
         <div class="ticket-left">
-            <h3>#002 - Server Down</h3>
-            <p>Website tidak bisa diakses</p>
+            <h3>#102 - Update Data Mahasiswa</h3>
+            <p>Perubahan data NIM dan prodi tidak tersimpan</p>
         </div>
         <div class="ticket-right">
             <span class="status progress">Progress</span>
@@ -48,24 +51,38 @@
         </div>
     </div>
 
+    {{-- 3 --}}
     <div class="ticket-card">
         <div class="ticket-left">
-            <h3>#003 - Bug UI</h3>
-            <p>Tampilan dashboard berantakan</p>
+            <h3>#103 - Sinkronisasi Kerjasama MoU</h3>
+            <p>Data kerja sama dengan mitra belum muncul di dashboard</p>
         </div>
         <div class="ticket-right">
             <span class="status resolved">Resolved</span>
+            <small>30 menit lalu</small>
+        </div>
+    </div>
+
+    {{-- 4 --}}
+    <div class="ticket-card">
+        <div class="ticket-left">
+            <h3>#104 - Pendaftaran Magang MBKM</h3>
+            <p>Mahasiswa gagal submit program magang berdampak</p>
+        </div>
+        <div class="ticket-right">
+            <span class="status open">Open</span>
             <small>1 jam lalu</small>
         </div>
     </div>
 
+    {{-- 5 --}}
     <div class="ticket-card">
         <div class="ticket-left">
-            <h3>#004 - Reset Password</h3>
-            <p>Email reset tidak masuk</p>
+            <h3>#105 - Error Upload Dokumen BKD</h3>
+            <p>File sertifikasi dosen gagal diupload ke server</p>
         </div>
         <div class="ticket-right">
-            <span class="status open">Open</span>
+            <span class="status progress">Progress</span>
             <small>2 jam lalu</small>
         </div>
     </div>

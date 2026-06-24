@@ -1,7 +1,7 @@
 <aside class="sidebar">
 
     <div class="sidebar-header">
-        <h2>BPA SUPER ADMIN</h2>
+        <h2>BPA Super Admin</h2>
     </div>
 
     <ul class="sidebar-menu">

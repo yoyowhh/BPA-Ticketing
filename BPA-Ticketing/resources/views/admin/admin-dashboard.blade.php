@@ -35,31 +35,52 @@
         <h3>Ticket Terbaru</h3>
 
         <div class="ticket">
-            <span>#001 Login Error</span>
+            <span>#101 - Verifikasi Sertifikasi Dosen</span>
             <span class="status open">Open</span>
         </div>
 
         <div class="ticket">
-            <span>#002 Server Down</span>
+            <span>#102 - Update Data Mahasiswa</span>
             <span class="status progress">Progress</span>
         </div>
 
         <div class="ticket">
-            <span>#003 UI Bug</span>
+            <span>#103 - Sinkronisasi Kerjasama MoU</span>
             <span class="status resolved">Resolved</span>
         </div>
 
     </div>
 
-    <div class="filter-box">
+<div class="filter-box">
 
-        <h3>Filter</h3>
+    <h3>Filter</h3>
 
-        <div class="filter-item">Semua Status</div>
-        <div class="filter-item">Kategori</div>
-        <div class="filter-item">PIC</div>
+    {{-- STATUS --}}
+    <select class="filter-item">
+        <option value="">Semua Status</option>
+        <option value="open">Open</option>
+        <option value="progress">Progress</option>
+        <option value="resolved">Resolved</option>
+    </select>
 
-    </div>
+    {{-- KATEGORI --}}
+    <select class="filter-item">
+        <option value="">Semua Kategori</option>
+        <option value="sertifikasi">Data Sertifikasi Dosen</option>
+        <option value="mahasiswa">Data Mahasiswa</option>
+        <option value="magang">Program Magang Berdampak</option>
+        <option value="kerjasama">Data Kerjasama</option>
+    </select>
+
+    {{-- PIC --}}
+    <select class="filter-item">
+        <option value="">Semua PIC</option>
+        <option value="admin1">Admin 1</option>
+        <option value="admin2">Admin 2</option>
+        <option value="it-support">IT Support</option>
+    </select>
+
+</div>
 
 </div>
 

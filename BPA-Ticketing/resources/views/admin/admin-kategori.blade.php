@@ -25,7 +25,7 @@
 <div class="category-list">
 
     <div class="category-card">
-        <span>Login & Auth</span>
+        <span>Data Sertifikasi Dosen</span>
         <div class="action">
             <button class="btn-edit">Edit</button>
             <button class="btn-delete">Hapus</button>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="category-card">
-        <span>Server & Hosting</span>
+        <span>Program Magang Berdampak</span>
         <div class="action">
             <button class="btn-edit">Edit</button>
             <button class="btn-delete">Hapus</button>
@@ -41,7 +41,7 @@
     </div>
 
     <div class="category-card">
-        <span>Bug UI/UX</span>
+        <span>Data Mahasiswa</span>
         <div class="action">
             <button class="btn-edit">Edit</button>
             <button class="btn-delete">Hapus</button>
@@ -49,7 +49,7 @@
     </div>
 
     <div class="category-card">
-        <span>Reset Password</span>
+        <span>Data Kerjasama</span>
         <div class="action">
             <button class="btn-edit">Edit</button>
             <button class="btn-delete">Hapus</button>
