@@ -60,6 +60,7 @@ Route::middleware('auth.user')->group(function () {
 
     Route::post('/ticket/{id}/close', [TicketController::class, 'close'])
         ->whereNumber('id');
+
 });
 
 /*
@@ -85,7 +86,8 @@ Route::middleware('auth.admin')->group(function () {
 
     Route::post('/admin/ticket/{id}/status', [AdminController::class, 'updateStatus'])
         ->whereNumber('id');
-
+// Tambahkan baris ini di routes/web.php
+Route::post('/admin/ticket/{id}/update-status', [AdminController::class, 'updateStatus']);
     // OPTIONAL: halaman kategori/pengguna/laporan (view-only)
     Route::get('/admin/kategori', fn () => view('admin.admin-kategori'));
     Route::get('/admin/pengguna', fn () => view('admin.admin-pengguna'));

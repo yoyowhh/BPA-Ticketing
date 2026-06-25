@@ -37,52 +37,79 @@ class AdminController extends Controller
         return view('admin.admin-dashboard', compact('countOpen', 'countDone'));
     }
 
-    public function tickets()
-    {
-        $tickets = DB::table('ticket')
-            ->join('user', 'ticket.user_id', '=', 'user.user_id')
-            ->join('kategori', 'ticket.kategori_id', '=', 'kategori.kategori_id')
-            ->get();
+  public function tickets(Request $request)
+{
+    // 1. Buat query dasar
+    $query = DB::table('ticket')
+        ->join('user', 'ticket.user_id', '=', 'user.user_id')
+        ->join('kategori', 'ticket.kategori_id', '=', 'kategori.kategori_id');
 
-        // Asumsi kamu mungkin memiliki file admin-tickets.blade.php
-        // Jika tidak, sesuaikan nama view-nya di sini
-        return view('admin.admin-ticket', compact('tickets'));
+    // 2. Filter berdasarkan status jika ada
+    if ($request->filled('status') && $request->status !== 'Semua') {
+        $query->where('ticket.status', $request->status);
     }
 
-    public function detail($id)
-    {
-        $ticket = DB::table('ticket')->where('ticket_id', $id)->first();
+    // 3. Ambil data
+    $tickets = $query->orderBy('ticket.created_at', 'desc')->get();
 
-        $balasan = DB::table('balasan')
-            ->where('ticket_id', $id)
-            ->get();
+    // 4. HITUNG TOTAL (Ini yang kurang)
+    $total = $tickets->count();
 
-        // Disesuaikan dari 'admin.ticket-detail' menjadi 'admin.admin-ticket'
-        return view('admin.admin-ticket', compact('ticket', 'balasan'));
-    }
+    // 5. Kirim data ke view
+    return view('admin.admin-ticket', compact('tickets', 'total'));
+}
+public function detail($id)
+{
+    $ticket = DB::table('ticket')
+        ->join('user', 'ticket.user_id', '=', 'user.user_id')
+        ->join('kategori', 'ticket.kategori_id', '=', 'kategori.kategori_id')
+        ->where('ticket_id', $id)
+        ->first();
 
+    // Gunakan leftJoin agar data balasan tetap tampil meskipun admin_id = NULL
+    $balasan = DB::table('balasan')
+        ->leftJoin('admin', 'balasan.admin_id', '=', 'admin.admin_id')
+        ->where('ticket_id', $id)
+        ->orderBy('created_at', 'asc')
+        ->get();
+
+    return view('admin.chat', compact('ticket', 'balasan'));
+}
     public function reply(Request $request, $id)
-    {
-        $adminId = Session::get('admin_id');
+{
+    $adminId = Session::get('admin_id');
 
-        DB::table('balasan')->insert([
-            'ticket_id' => $id,
-            'admin_id' => $adminId,
-            'pesan' => $request->pesan,
-            'created_at' => now()
+    // 1. Simpan balasan ke tabel 'balasan'
+    DB::table('balasan')->insert([
+        'ticket_id' => $id,
+        'admin_id' => $adminId,
+        'pesan' => $request->pesan,
+        'created_at' => now()
+    ]);
+
+    // 2. Update status tiket menjadi 'In Progress' secara otomatis
+    DB::table('ticket')
+        ->where('ticket_id', $id)
+        ->update(['status' => 'In Progress']);
+
+    return back()->with('success', 'Balasan terkirim dan status diupdate menjadi In Progress');
+}
+   public function updateStatus(Request $request, $id)
+{
+    // Validasi
+    $request->validate([
+        'status' => 'required|in:Open,In Progress,Resolved,Closed'
+    ]);
+
+    // Update ke database
+    DB::table('ticket')
+        ->where('ticket_id', $id)
+        ->update([
+            'status' => $request->status,
+            'updated_at' => now()
         ]);
 
-        DB::table('ticket')->where('ticket_id', $id)
-            ->update(['status' => 'In Progress']);
-
-        return back();
-    }
-
-    public function updateStatus(Request $request, $id)
-    {
-        DB::table('ticket')->where('ticket_id', $id)
-            ->update(['status' => $request->status]);
-
-        return back();
-    }
+    // WAJIB: Return agar halaman ter-refresh
+    return back()->with('success', 'Status berhasil diupdate!');
+}
 }

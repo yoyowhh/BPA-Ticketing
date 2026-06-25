@@ -65,36 +65,42 @@ public function create()
         return view('ticket.history', compact('tickets'));
     }
 
-    public function show($id)
-    {
-        $ticket = DB::table('ticket')->where('ticket_id', $id)->first();
+   public function show($id)
+{
+    // 1. Ambil data tiket
+    $ticket = DB::table('ticket')
+        ->join('kategori', 'ticket.kategori_id', '=', 'kategori.kategori_id')
+        ->where('ticket_id', $id)
+        ->first();
 
-        $balasan = DB::table('balasan')
-            ->join('admin', 'balasan.admin_id', '=', 'admin.admin_id')
-            ->where('ticket_id', $id)
-            ->get();
+    // 2. Gunakan leftJoin agar pesan dari User (admin_id=null) tetap muncul
+    // Kita juga mengambil admin.nama_admin jika ada, tapi tidak memaksa join
+    $balasan = DB::table('balasan')
+        ->leftJoin('admin', 'balasan.admin_id', '=', 'admin.admin_id')
+        ->where('balasan.ticket_id', $id)
+        ->orderBy('balasan.created_at', 'asc')
+        ->select('balasan.*', 'admin.nama_admin')
+        ->get();
 
-        return view('ticket.detail', compact('ticket', 'balasan'));
-    }
+    return view('ticket.detail', compact('ticket', 'balasan'));
+}
 
-    public function reply(Request $request, $id)
+   public function reply(Request $request, $id)
 {
     $isAdmin = session()->has('admin_id');
+    $isUser = session()->has('user_id'); // Pastikan Anda set session user_id saat login user
 
     DB::table('balasan')->insert([
-        'ticket_id' => $id,
-        'admin_id' => $isAdmin ? session('admin_id') : null,
-        'pesan' => $request->pesan,
+        'ticket_id'  => $id,
+        'admin_id'   => $isAdmin ? session('admin_id') : null,
+        'user_id'    => $isUser ? session('user_id') : null,
+        'pesan'      => $request->pesan,
         'created_at' => now()
     ]);
 
-    // status update tetap seperti ini (OK)
+    // Jika admin yang balas, ubah status ke In Progress
     if ($isAdmin) {
-        DB::table('ticket')->where('ticket_id', $id)
-            ->update(['status' => 'In Progress']);
-    } else {
-        DB::table('ticket')->where('ticket_id', $id)
-            ->update(['status' => 'Open']);
+        DB::table('ticket')->where('ticket_id', $id)->update(['status' => 'In Progress']);
     }
 
     return back();
