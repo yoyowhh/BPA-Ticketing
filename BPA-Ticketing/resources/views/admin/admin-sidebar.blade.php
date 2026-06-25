@@ -29,8 +29,16 @@
     </ul>
 
     <div class="sidebar-footer">
-    <p>Login sebagai</p>
-    <strong>Admin</strong>
+
+    <div class="user-info">
+        <span class="label">Login sebagai</span>
+        <span class="name">Admin</span>
+    </div>
+
+    <a href="/logout" class="logout-btn">
+        Logout
+    </a>
+
 </div>
 
 </aside>

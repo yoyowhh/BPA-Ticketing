@@ -28,6 +28,7 @@
 <div class="ticket-list">
 
     {{-- 1 --}}
+    <a href="/admin/ticket/101" class="ticket-link">
     <div class="ticket-card">
         <div class="ticket-left">
             <h3>#101 - Verifikasi Sertifikasi Dosen</h3>
@@ -38,8 +39,10 @@
             <small>5 menit lalu</small>
         </div>
     </div>
+</a>
 
     {{-- 2 --}}
+    <a href="/admin/ticket/102" class="ticket-link">
     <div class="ticket-card">
         <div class="ticket-left">
             <h3>#102 - Update Data Mahasiswa</h3>
@@ -52,6 +55,7 @@
     </div>
 
     {{-- 3 --}}
+    <a href="/admin/ticket/103" class="ticket-link"></a>
     <div class="ticket-card">
         <div class="ticket-left">
             <h3>#103 - Sinkronisasi Kerjasama MoU</h3>
@@ -64,6 +68,7 @@
     </div>
 
     {{-- 4 --}}
+    <a href="/admin/ticket/104" class="ticket-link"></a>
     <div class="ticket-card">
         <div class="ticket-left">
             <h3>#104 - Pendaftaran Magang MBKM</h3>
@@ -76,6 +81,7 @@
     </div>
 
     {{-- 5 --}}
+    <a href="/admin/ticket/105" class="ticket-link"></a>
     <div class="ticket-card">
         <div class="ticket-left">
             <h3>#105 - Error Upload Dokumen BKD</h3>
